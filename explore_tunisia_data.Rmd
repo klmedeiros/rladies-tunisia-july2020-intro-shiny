@@ -27,9 +27,10 @@ tunisia <- tunisia_raw %>%
   filter(!is.na(year))
 
 tunisia <- tunisia %>% 
-  mutate(year = as.factor(year))
+  mutate(year = as.factor(year),
+         agriculture = as.double(agriculture))
 
-write_csv(tunisia, "./tunisia_app/tunisia.csv")
+write_csv(tunisia, "./tunisia_app_tabs/tunisia.csv")
 ```
 
 
