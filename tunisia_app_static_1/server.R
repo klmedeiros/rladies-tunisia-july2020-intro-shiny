@@ -14,7 +14,7 @@ shinyServer(function(input, output) {
                    year <= input$years[2]) %>% 
             ggplot(aes(year, growth_rate_of_the_real_gross_domestic_product_gdp, group = 1)) +
             geom_line() +
-            labs(title = "Growht Rate of the GDP, Tunisia",
+            labs(title = "Growth Rate of the GDP, Tunisia",
                  x = "",
                  y = "Growth Rate (%)")
 
