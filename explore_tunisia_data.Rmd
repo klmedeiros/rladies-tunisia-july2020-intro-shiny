@@ -30,14 +30,24 @@ tunisia <- tunisia %>%
   mutate(year = as.factor(year),
          agriculture = as.double(agriculture))
 
-write_csv(tunisia, "./tunisia_app_tabs/tunisia.csv")
+write_csv(tunisia, "./tunisia.csv")
 ```
 
 
 ```{r}
-tunisia %>% 
+library(plotly)
+
+gdpPlot <- tunisia %>% 
   filter(year != 2008) %>% 
   ggplot(aes(year, growth_rate_of_the_real_gross_domestic_product_gdp, group = 1)) +
   geom_line() 
+
+ggplotly(gdpPlot)
+```
+
+```{r}
+library(DT)
+DT::datatable(tunisia %>% 
+            select(year, contains("_percent")))
 ```
 
