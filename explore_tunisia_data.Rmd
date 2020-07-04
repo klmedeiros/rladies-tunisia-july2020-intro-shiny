@@ -1,0 +1,42 @@
+---
+title: "explore data"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(readxl)
+library(janitor)
+```
+
+Data from: https://www.statista.com/statistics/524575/share-of-economic-sectors-in-the-gdp-in-tunisia/
+
+We'll re-create the graph on this page in our app!
+
+```{r import_data}
+tunisia_raw <- read_excel("data_Tunisia.xlsx") %>% 
+  clean_names()
+
+tunisia_raw
+```
+
+```{r clean_data}
+tunisia <- tunisia_raw %>% 
+  filter(!is.na(year))
+
+tunisia <- tunisia %>% 
+  mutate(year = as.factor(year))
+
+write_csv(tunisia, "./tunisia_app/tunisia.csv")
+```
+
+
+```{r}
+tunisia %>% 
+  filter(year != 2008) %>% 
+  ggplot(aes(year, growth_rate_of_the_real_gross_domestic_product_gdp, group = 1)) +
+  geom_line() 
+```
+
